@@ -12,6 +12,7 @@ public class SqueakyClean {
         mapOfLetterConnectedToTranslation.put('4', 'a');
         mapOfLetterConnectedToTranslation.put('7', 't');
         mapOfLetterConnectedToTranslation.put(' ', '_');
+        mapOfLetterConnectedToTranslation.put('-', ' ');
         boolean isInArray = true;
         char[] allowedLetterArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u'
                 , 'w', 'z', 'x', 'y', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'W',
@@ -33,14 +34,12 @@ public class SqueakyClean {
         }
         for (int i = 0; i < stringBuilder.length(); i++) {
             if (mapOfLetterConnectedToTranslation.containsKey(stringBuilder.charAt(i))) {
-                stringBuilder.replace(i, i + 1, "" + mapOfLetterConnectedToTranslation.get(stringBuilder.charAt(i)));
-            }
-        }
-        for (int i = 0; i < stringBuilder.length(); i++) {
-            if (stringBuilder.charAt(i) == '-') {
-                char letter = stringBuilder.charAt(i + 1);
-                stringBuilder.replace(i, i + 2, "" + Character.toUpperCase(letter));
-                i--;
+                if(stringBuilder.charAt(i) == '-'){
+                    char letter = stringBuilder.charAt(i + 1);
+                    stringBuilder.replace(i, i + 2, "" + Character.toUpperCase(letter));
+                }else {
+                    stringBuilder.replace(i, i + 1, "" + mapOfLetterConnectedToTranslation.get(stringBuilder.charAt(i)));
+                }
             }
         }
         return stringBuilder.toString();
